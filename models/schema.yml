@@ -20,7 +20,7 @@ sources:
           - name: quantity
             description: cantidad de productos vendidos en esa orden
       - name: product
-        identifier: raw_gz_product 
+        identifier: raw_gz_product
         description: data correspondiente a los productos y stock de la empresa
         columns:
           - name: products_id
@@ -29,7 +29,7 @@ sources:
               - unique
               - not_null
           - name: purchase_price
-            description: precio de compra del producto 
+            description: precio de compra del producto
       - name: ship
         identifier: raw_gz_ship
         description: data correspondiente a los datos de envios
@@ -45,5 +45,15 @@ sources:
             description: costo asociado al almacenaje de archivo
           - name: ship_cost
             description: costo asociado al envío
-
-    
+models:
+  - name: stg_raw__product
+    description: quantity sold and product_id
+    columns:
+      - name: products_id
+        description: primary key
+        tests:
+          - not_null
+          - unique
+      - name: purchase_price
+        description: precio de compra de productos 
+ 
