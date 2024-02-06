@@ -3,12 +3,47 @@ version: 2
 sources:
   - name: raw
     schema: gz_raw_data
+    description: greenwez sales, products and ship data
     tables:
       - name: sales
         identifier: raw_gz_sales
+        description: data correspondiente a las ventas de la empresa
+        columns:
+          - name: date_date
+            description: fecha de la venta
+          - name: orders_id
+            description: ID de la orden de la venta
+          - name: products_id
+            description: ID del producto de la venta
+          - name: revenue
+            description: ganancias generadas por la venta
+          - name: quantity
+            description: cantidad de productos vendidos en esa orden
       - name: product
         identifier: raw_gz_product 
+        description: data correspondiente a los productos y stock de la empresa
+        columns:
+          - name: products_id
+            description: primary key correspondiente al ID del producto
+            tests:
+              - unique
+              - not_null
+          - name: purchase_price
+            description: precio de compra del producto 
       - name: ship
         identifier: raw_gz_ship
+        description: data correspondiente a los datos de envios
+        columns:
+          - name: orders_id
+            description: ID de la orden de la venta
+            tests:
+              - unique
+              - not_null
+          - name: shipping_fee
+            description: cargo a cobrar por el envío
+          - name: logcost
+            description: costo asociado al almacenaje de archivo
+          - name: ship_cost
+            description: costo asociado al envío
 
     
