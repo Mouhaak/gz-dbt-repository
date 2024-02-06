@@ -46,14 +46,170 @@ sources:
           - name: ship_cost
             description: costo asociado al envío
 models:
+  - name: init_orders_operational
+    description: This table contains operational information about orders.
+    columns:
+      - name: date_date
+        description: The date of the order.
+        tests:
+          - not_null
+      - name: orders_id
+        description: The unique identifier of the order.
+        tests:
+          - not_null
+          - unique
+      - name: revenue
+        description: The revenue generated from the order.
+        tests:
+          - not_null
+      - name: purchase_cost
+        description: The cost of purchasing the items in the order.
+        tests:
+          - not_null
+      - name: margin
+        description: The margin made from the order.
+        tests:
+          - not_null
+      - name: operational_margin
+        description: The operational margin made from the order.
+        tests:
+          - not_null
+  - name: init_order_margin
+    description: This table contains margin information about orders.
+    columns:
+      - name: date_date
+        description: The date of the order.
+        tests:
+          - not_null
+      - name: orders_id
+        description: The unique identifier of the order.
+        tests:
+          - not_null
+          - unique
+      - name: revenue
+        description: The revenue generated from the order.
+        tests:
+          - not_null
+      - name: quantity
+        description: The quantity of items in the order.
+        tests:
+          - not_null
+      - name: purchase_cost
+        description: The cost of purchasing the items in the order.
+        tests:
+          - not_null
+      - name: margin
+        description: The margin made from the order.
+        tests:
+          - not_null
+  - name: init_sales_margin
+    description: This table contains margin information about sales.
+    columns:
+      - name: date_date
+        description: The date of the sale.
+        tests:
+          - not_null
+      - name: orders_id
+        description: The unique identifier of the order.
+        tests:
+          - not_null
+          - unique
+      - name: revenue
+        description: The revenue generated from the sale.
+        tests:
+          - not_null
+      - name: quantity
+        description: The quantity of items in the sale.
+        tests:
+          - not_null
+      - name: purchase_cost
+        description: The cost of purchasing the items in the sale.
+        tests:
+          - not_null
+      - name: margin
+        description: The margin made from the sale.
+        tests:
+          - not_null
+  - name: finance_day
+    description: This table contains daily financial information.
+    columns:
+      - name: date_date
+        description: The date.
+        tests:
+          - not_null
+      - name: nb_transactions
+        description: The number of transactions made on the date.
+        tests:
+          - not_null
+      - name: revenue
+        description: The revenue generated on the date.
+        tests:
+          - not_null
+      - name: margin
+        description: The margin made on the date.
+        tests:
+          - not_null
+      - name: operational_margin
+        description: The operational margin made on the date.
+        tests:
+          - not_null
+      - name: average_basket
+        description: The average basket size on the date.
+        tests:
+          - not_null
   - name: stg_raw__product
-    description: quantity sold and product_id
+    description: This staging table contains product information.
     columns:
       - name: products_id
-        description: primary key
+        description: The unique identifier of the product.
         tests:
           - not_null
           - unique
       - name: purchase_price
-        description: precio de compra de productos 
+        description: The purchase price of the product.
+        tests:
+          - not_null
+  - name: stg_raw__sales
+    description: This staging table contains sales information.
+    columns:
+      - name: date_date
+        description: The date of the sale.
+        tests:
+          - not_null
+      - name: orders_id
+        description: The unique identifier of the order.
+        tests:
+          - not_null
+      - name: products_id
+        description: The unique identifier of the product sold.
+        tests:
+          - not_null
+      - name: revenue
+        description: The revenue generated from the sale.
+        tests:
+          - not_null
+      - name: quantity
+        description: The quantity of items sold in the order.
+        tests:
+          - not_null
+  - name: stg_raw__ship
+    description: This staging table contains shipping information.
+    columns:
+      - name: orders_id
+        description: The unique identifier of the order that was shipped.
+        tests:
+          - not_null
+          - unique
+      - name: shipping_fee
+        description: The shipping fee for the order.
+        tests:
+          - not_null
+      - name: logcost
+        description: The logistic cost for the order.
+        tests:
+          - not_null
+      - name: ship_cost
+        description: The shipping cost for the order.
+        tests:
+          - not_null
  
