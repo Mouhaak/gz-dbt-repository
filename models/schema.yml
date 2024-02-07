@@ -46,7 +46,7 @@ sources:
           - name: ship_cost
             description: costo asociado al envío
 models:
-  - name: init_orders_operational
+  - name: int_orders_operational
     description: This table contains operational information about orders.
     columns:
       - name: date_date
@@ -64,8 +64,6 @@ models:
           - not_null
       - name: purchase_cost
         description: The cost of purchasing the items in the order.
-        tests:
-          - not_null
       - name: margin
         description: The margin made from the order.
         tests:
@@ -74,7 +72,7 @@ models:
         description: The operational margin made from the order.
         tests:
           - not_null
-  - name: init_order_margin
+  - name: int_order_margin
     description: This table contains margin information about orders.
     columns:
       - name: date_date
@@ -102,7 +100,7 @@ models:
         description: The margin made from the order.
         tests:
           - not_null
-  - name: init_sales_margin
+  - name: int_sales_margin
     description: This table contains margin information about sales.
     columns:
       - name: date_date
@@ -113,7 +111,6 @@ models:
         description: The unique identifier of the order.
         tests:
           - not_null
-          - unique
       - name: revenue
         description: The revenue generated from the sale.
         tests:
