@@ -72,7 +72,7 @@ models:
         description: The operational margin made from the order.
         tests:
           - not_null
-  - name: int_order_margin
+  - name: int_orders_margin
     description: This table contains margin information about orders.
     columns:
       - name: date_date
@@ -83,7 +83,6 @@ models:
         description: The unique identifier of the order.
         tests:
           - not_null
-          - unique
       - name: revenue
         description: The revenue generated from the order.
         tests:
