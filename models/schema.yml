@@ -5,6 +5,78 @@ sources:
     schema: gz_raw_data
     description: greenwez sales, products and ship data
     tables:
+      - name: adwords
+        identifier: raw_gz_adwords
+        description: AdWords data with campaign details and costs
+        columns:
+          - name: date_date
+            description: Date of the ad campaign
+          - name: paid_source
+            description: Source of the paid ad
+          - name: campaign_key
+            description: Unique identifier for the ad campaign
+          - name: camPGN_name
+            description: Name of the ad campaign
+          - name: ads_cost
+            description: Cost of the ad
+          - name: impression
+            description: Number of impressions for the ad
+          - name: click
+            description: Number of clicks for the ad
+      - name: criteo
+        identifier: raw_gz_criteo
+        description: Criteo data with campaign details and costs
+        columns:
+          - name: date_date
+            description: Date of the ad campaign
+          - name: paid_source
+            description: Source of the paid ad
+          - name: campaign_key
+            description: Unique identifier for the ad campaign
+          - name: camPGN_name
+            description: Name of the ad campaign
+          - name: ads_cost
+            description: Cost of the ad
+          - name: impression
+            description: Number of impressions for the ad
+          - name: click
+            description: Number of clicks for the ad
+      - name: bing
+        identifier: raw_gz_bing
+        description: bing data with campaign details and costs
+        columns:
+          - name: date_date
+            description: Date of the ad campaign
+          - name: paid_source
+            description: Source of the paid ad
+          - name: campaign_key
+            description: Unique identifier for the ad campaign
+          - name: camPGN_name
+            description: Name of the ad campaign
+          - name: ads_cost
+            description: Cost of the ad
+          - name: impression
+            description: Number of impressions for the ad
+          - name: click
+            description: Number of clicks for the ad
+      - name: facebook
+        identifier: raw_gz_facebook
+        description: facebook data with campaign details and costs
+        columns:
+          - name: date_date
+            description: Date of the ad campaign
+          - name: paid_source
+            description: Source of the paid ad
+          - name: campaign_key
+            description: Unique identifier for the ad campaign
+          - name: camPGN_name
+            description: Name of the ad campaign
+          - name: ads_cost
+            description: Cost of the ad
+          - name: impression
+            description: Number of impressions for the ad
+          - name: click
+            description: Number of clicks for the ad
       - name: sales
         identifier: raw_gz_sales
         description: data correspondiente a las ventas de la empresa
@@ -46,6 +118,183 @@ sources:
           - name: ship_cost
             description: costo asociado al envío
 models:
+  - name: int_campaigns
+    description: intermediate model for all the ads camapaigns
+    columns:
+      - name: date_date
+        description: Date of the ad campaign
+        tests:
+          - not_null
+      - name: paid_source
+        description: Source of the paid ad
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Adwords', 'Bing', 'Criteo', 'Facebook']
+      - name: campaign_key
+        description: Unique identifier for the ad campaign
+        tests:
+          - not_null
+      - name: campaign_name
+        description: Name of the ad campaign
+        tests:
+          - not_null
+      - name: ads_cost
+        description: Cost of the ad
+        tests:
+          - not_null
+      - name: impression
+        description: Number of impressions for the ad
+      - name: click
+        description: Number of clicks for the ad
+  - name: int_campaigns_day
+    description: intermediate model for all the ads camapaigns
+    columns:
+      - name: date_date
+        description: Date of the ad campaign
+        tests:
+          - not_null
+          - unique
+      - name: ads_cost
+        description: Cost of the ad
+        tests:
+          - not_null
+      - name: impression
+        description: Number of impressions for the ad
+      - name: click
+        description: Number of clicks for the ad
+  - name: stg_raw__adwords
+    description: Staging model for AdWords data
+    columns:
+      - name: date_date
+        description: Date of the ad campaign
+        tests:
+          - not_null
+      - name: paid_source
+        description: Source of the paid ad
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Adwords']
+      - name: campaign_key
+        description: Unique identifier for the ad campaign
+        tests:
+          - not_null
+      - name: campaign_name
+        description: Name of the ad campaign
+        tests:
+          - not_null
+      - name: ads_cost
+        description: Cost of the ad
+        tests:
+          - not_null
+      - name: impression
+        description: Number of impressions for the ad
+        tests:
+          - not_null
+      - name: click
+        description: Number of clicks for the ad
+        tests:
+          - not_null
+  - name: stg_raw__criteo
+    description: Staging model for Criteo data
+    columns:
+      - name: date_date
+        description: Date of the ad campaign
+        tests:
+          - not_null
+      - name: paid_source
+        description: Source of the paid ad
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Criteo']
+      - name: campaign_key
+        description: Unique identifier for the ad campaign
+        tests:
+          - not_null
+      - name: campaign_name
+        description: Name of the ad campaign
+        tests:
+          - not_null
+      - name: ads_cost
+        description: Cost of the ad
+        tests:
+          - not_null
+      - name: impression
+        description: Number of impressions for the ad
+        tests:
+          - not_null
+      - name: click
+        description: Number of clicks for the ad
+        tests:
+          - not_null
+  - name: stg_raw__bing
+    description: Staging model for Bing data
+    columns:
+      - name: date_date
+        description: Date of the ad campaign
+        tests:
+          - not_null
+      - name: paid_source
+        description: Source of the paid ad
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Bing']
+      - name: campaign_key
+        description: Unique identifier for the ad campaign
+        tests:
+          - not_null
+      - name: campaign_name
+        description: Name of the ad campaign
+        tests:
+          - not_null
+      - name: ads_cost
+        description: Cost of the ad
+        tests:
+          - not_null
+      - name: impression
+        description: Number of impressions for the ad
+        tests:
+          - not_null
+      - name: click
+        description: Number of clicks for the ad
+        tests:
+          - not_null
+  - name: stg_raw__facebook
+    description: Staging model for Facebook data
+    columns:
+      - name: date_date
+        description: Date of the ad campaign
+        tests:
+          - not_null
+      - name: paid_source
+        description: Source of the paid ad
+        tests:
+          - not_null
+          - accepted_values:
+              values: ['Facebook']
+      - name: campaign_key
+        description: Unique identifier for the ad campaign
+        tests:
+          - not_null
+      - name: campaign_name
+        description: Name of the ad campaign
+        tests:
+          - not_null
+      - name: ads_cost
+        description: Cost of the ad
+        tests:
+          - not_null
+      - name: impression
+        description: Number of impressions for the ad
+        tests:
+          - not_null
+      - name: click
+        description: Number of clicks for the ad
+        tests:
+          - not_null
   - name: int_orders_operational
     description: This table contains operational information about orders.
     columns:
@@ -208,4 +457,5 @@ models:
         description: The shipping cost for the order.
         tests:
           - not_null
+    
  
